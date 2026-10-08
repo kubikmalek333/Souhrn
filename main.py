@@ -12,7 +12,7 @@ with open(os.sep.join(["postavy.txt"]), encoding="utf-8") as soubor:
                 "vek": int(cast[1]),
                 "pohlavi": cast[2],
                 "zvire": cast[3].lower() == "ano",
-                "datum_promitani": cast[4],
+                "datum_promitani":datetime.strptime(cast[4], "%Y-%m-%d").date(),
                 "oblibenost": float(cast[5]),
             }
             if postavy_dict["oblibenost"] > 2.5:
@@ -36,7 +36,7 @@ with open("oblibene-postavy.txt", "w", encoding="utf-8") as vystup:
             str(postava["vek"]),
             postava["pohlavi"],
             "ano" if postava["zvire"] else "ne",
-            postava["datum_promitani"],
+            str(postava["datum_promitani"]),
             str(postava["oblibenost"]),
         ])
         vystup.write(radek + "\n")
